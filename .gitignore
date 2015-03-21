@@ -1,0 +1,10 @@
+#exculde cache files
+*__pycache__*
+bin/
+include/
+lib/
+local/
+build/
+credentials/
+*.pyc
+
