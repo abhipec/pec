@@ -12,7 +12,7 @@ from apiclient import errors
 
 
 # Path to the client_secret.json file downloaded from the Developer Console
-CLIENT_SECRET_FILE = '../credentials/client_secret_999151699233-pmqq91k82q11v83v90vuifopav9hti6j.apps.googleusercontent.com.json'
+CLIENT_SECRET_FILE = '../credentials/secret.json'
 
 # Check https://developers.google.com/gmail/api/auth/scopes for all available scopes
 OAUTH_SCOPE = 'https://www.googleapis.com/auth/gmail.modify'
