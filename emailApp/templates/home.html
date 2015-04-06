@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table">
+{% for email in emails %}
+  <tr>
+    <td>{{email.sender}}</td>
+    <td><a href="{{email.messageId}}">{{ email.subject }}</a></td>
+  <tr>
+{% endfor %}
+</table>
+{% endblock %}

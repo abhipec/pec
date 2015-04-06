@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table">
+{% for item in items %}
+  <tr>
+    <td>{{item.data}}</td>
+    <td><a href="{{item.source.getUrl}}">{{ item.source.sender }}</a></td>
+  <tr>
+{% endfor %}
+</table>
+{% endblock %}

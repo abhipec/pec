@@ -6,5 +6,6 @@ lib/
 local/
 build/
 credentials/
+data/
 *.pyc
 

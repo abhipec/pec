@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{# Import base template #}
+
+{% block title %}{{ email.subject}}{% endblock %}
+{# Title of single page #}
+
+{% block heading %}{{ email.subject }}{% endblock %}
+{# heading of course #}
+
+{% block content %}
+<h2>{{email.category}}</h2>
+<h3>{{displayMessage}}</h3>
+<p>{{data | safe}}</p>
+{% endblock %}
+{# body of course #}
