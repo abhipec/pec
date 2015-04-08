@@ -210,18 +210,7 @@ def messagePage(request, messageId):
         displayMessage = "This email has attachment"
         for attachment in attachments:
             filePath = emailUtil.emailPath(messageId) + 'attachments/' + attachment
-    if email.rules.all():
-        for rule in email.rules.all():
-            if rule.name == 'download':
-                data = filter(None,rule.rule.split('\n'))
-                if not os.path.isdir(data[0]):
-                    os.makedirs(data[0])
-                fileName, fileExtension = os.path.splitext(filePath)
-                if len(data) == 2:
-                    if data[1] =='date':
-                        now = datetime.datetime.now()
-                        fileName = str(now.year) + '-' + str(now.month) + '-' + str(now.day)
-                shutil.copy(filePath, data[0] + fileName + fileExtension)
+
     return render_to_response('message.html', locals(), context_instance=RequestContext(request))
 
 def saveAllUnreadEmails(request):

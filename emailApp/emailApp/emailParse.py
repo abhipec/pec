@@ -27,33 +27,33 @@ def htmlToText(html):
     return cleanText(soup.get_text())
 
 def emailParse(email, data):
-    msg = mime.from_string(str(data))
-    sender = msg.headers['From'].encode('ascii','ignore')
+
+    msg = mime.from_string(str(data).decode('utf-8').encode('ascii','ignore'))
+    sender = msg.headers['From']
     senderEmail = re.search(emailRegex,sender)
     if not senderEmail:
         print(sender)
     email.sender = senderEmail.group(0)
-    email.subject = msg.headers['Subject'].encode('ascii','ignore')
-    date = msg.headers['Date'].encode('ascii','ignore')
+    email.subject = msg.headers['Subject']
+    date = msg.headers['Date']
     if date.find('(') > -1:
         date = date[:date.find('(')]
-    print(date)
     email.timeStamp = dateParser.parse(date)
     if msg.content_type.is_multipart():
         for part in msg.parts:
             if part.content_type == 'text/plain':
-                email.textPlain = cleanText(part.body.decode('utf-8').encode('ascii'))
+                email.textPlain = cleanText(part.body)
             elif part.content_type == 'text/html':
-                email.textHtml = htmlToText(part.body.decode('utf-8').encode('ascii'))
+                email.textHtml = htmlToText(part.body)
             elif part.content_type == 'application/pdf' or part.content_type == 'application/octet-stream':
                 filename = part.headers['content-Disposition'][1]['filename']
                 emailUtil.writeFile(email.messageId, part.body, filename)
-                email.attachments = email.attachments + filename.decode('utf-8').encode('ascii') + ','
+                email.attachments = email.attachments + filename + ','
     elif msg.content_type.is_singlepart():
         if msg.headers['Content-Type'] == 'text/plain':
-            email.textPlain = cleanText(msg.body.decode('utf-8').encode('ascii'))
+            email.textPlain = cleanText(msg.body)
         elif msg.headers['Content-Type'] == 'text/html':
-            email.textHtml = htmlToText(msg.body.decode('utf-8').encode('ascii'))
+            email.textHtml = htmlToText(msg.body)
 
 
 def returnHtml(email):
